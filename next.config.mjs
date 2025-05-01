@@ -1,11 +1,9 @@
 import withPWAInit from '@ducanh2912/next-pwa';
-import type { NextConfig } from 'next';
 
 const withPWA = withPWAInit({
   dest: 'public',
   disable: false,
   register: true,
-  // @ts-expect-error - runtimeCachingの型エラーを無視
   runtimeCaching: [
     {
       urlPattern: '/',
@@ -28,7 +26,7 @@ const withPWA = withPWAInit({
   },
 });
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   devIndicators: false,
 };
 
