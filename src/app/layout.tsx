@@ -1,8 +1,8 @@
 'use client';
 
 import '@/styles/globals.css';
-import { PrivyProvider } from '@/components/providers/privy-provider';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { PrivyProvider } from '@/components/providers/privy-provider';
 import { Toaster } from 'sonner';
 
 // メタデータは別ファイルに移動するため、一時的にここでは型のみ定義
