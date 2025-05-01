@@ -10,9 +10,9 @@ const EmojiPickerComponent = dynamic(() => import('emoji-picker-react'), {
 type EmojiPickerProps = {
   message: string;
   showEmojiPicker: boolean;
-  emojiPickerRef: React.RefObject<HTMLDivElement | null>;
-  inputRef: React.RefObject<HTMLInputElement | null>;
-  deleteButtonRef: React.RefObject<HTMLButtonElement | null>;
+  emojiPickerRef: React.RefObject<HTMLDivElement>;
+  inputRef: React.RefObject<HTMLInputElement>;
+  deleteButtonRef: React.RefObject<HTMLButtonElement>;
   onEmojiClick: (emojiData: EmojiClickData) => void;
   onDeleteLastEmoji: () => void;
   onToggleEmojiPicker: () => void;
