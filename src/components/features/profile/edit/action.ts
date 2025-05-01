@@ -20,7 +20,9 @@ export async function handleProfileFormAction(formData: FormData) {
       ([, errors]) => errors && errors.length > 0,
     );
 
-    throw new Error(firstError?.[1]?.[0] || 'バリデーションエラーが発生しました');
+    throw new Error(
+      firstError?.[1]?.[0] || 'バリデーションエラーが発生しました',
+    );
   }
 
   const profileData: ProfileForm = {
@@ -40,7 +42,9 @@ export async function handleProfileFormAction(formData: FormData) {
 
     await updateUser(privyId, profileData);
   } catch (error) {
-    throw new Error(error instanceof Error ? error.message : 'エラーが発生しました');
+    throw new Error(
+      error instanceof Error ? error.message : 'エラーが発生しました',
+    );
   }
 
   redirect('/chat');

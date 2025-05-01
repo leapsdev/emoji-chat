@@ -8,8 +8,8 @@ import { profileFormSchema } from '@/repository/user/schema';
 import { useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
 import { usePrivy } from '@privy-io/react-auth';
-import { useFormStatus } from 'react-dom';
 import { useEffect, useState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { handleProfileFormAction } from './action';
 
 function SubmitButton() {
@@ -48,11 +48,7 @@ export function ProfileForm() {
   };
 
   return (
-    <form
-      className="space-y-6"
-      id={form.id}
-      action={clientAction}
-    >
+    <form className="space-y-6" id={form.id} action={clientAction}>
       <input
         type="hidden"
         name={fields.email.name}
@@ -60,9 +56,7 @@ export function ProfileForm() {
       />
 
       {error && (
-        <div className="p-4 rounded-lg bg-red-100 text-red-700">
-          {error}
-        </div>
+        <div className="p-4 rounded-lg bg-red-100 text-red-700">{error}</div>
       )}
 
       <div className="space-y-2">

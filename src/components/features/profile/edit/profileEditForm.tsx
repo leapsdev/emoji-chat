@@ -7,8 +7,8 @@ import { profileFormSchema } from '@/repository/user/schema';
 import type { User } from '@/types/database';
 import { useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
-import { useFormStatus } from 'react-dom';
 import { forwardRef, useState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { handleProfileFormAction } from './action';
 
 interface ProfileEditFormProps {
@@ -59,19 +59,12 @@ export const ProfileEditForm = forwardRef<
   };
 
   return (
-    <form
-      className="space-y-6"
-      id={form.id}
-      action={clientAction}
-      ref={ref}
-    >
+    <form className="space-y-6" id={form.id} action={clientAction} ref={ref}>
       <input type="hidden" name="userId" value={user.id} />
       <input type="hidden" name={fields.email.name} value={user.email || ''} />
 
       {error && (
-        <div className="p-4 rounded-lg bg-red-100 text-red-700">
-          {error}
-        </div>
+        <div className="p-4 rounded-lg bg-red-100 text-red-700">{error}</div>
       )}
 
       <div className="space-y-2">

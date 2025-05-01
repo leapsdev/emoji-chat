@@ -1,6 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import { base } from 'wagmi/chains';
 
 const PrivyProviderClient = dynamic(
   () => import('@privy-io/react-auth').then((mod) => mod.PrivyProvider),
@@ -21,6 +22,8 @@ export function PrivyProvider({ children }: { children: React.ReactNode }) {
         embeddedWallets: {
           createOnLogin: 'users-without-wallets',
         },
+        defaultChain: base,
+        supportedChains: [base],
       }}
     >
       {children}

@@ -18,7 +18,7 @@ dependencies:
     specifier: 2.12.0
     version: 2.12.0(@solana/web3.js@1.98.2)(@types/react@18.3.20)(bs58@6.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.8.3)(zod@3.24.3)
   '@privy-io/server-auth':
-    specifier: ^1.18.11
+    specifier: 1.21.2
     version: 1.21.2(typescript@5.8.3)(viem@2.28.1)
   '@radix-ui/react-checkbox':
     specifier: ^1.1.4
@@ -60,7 +60,7 @@ dependencies:
     specifier: ^4.12.2
     version: 4.12.2(react@18.3.1)
   ethers:
-    specifier: ^5.8.0
+    specifier: ^5.7.2
     version: 5.8.0
   firebase:
     specifier: ^11.4.0
@@ -75,10 +75,10 @@ dependencies:
     specifier: ^6.16.0
     version: 6.16.0(next@14.2.28)(react@18.3.1)
   react:
-    specifier: ^18.3.1
+    specifier: ^18.2.0
     version: 18.3.1
   react-dom:
-    specifier: ^18.3.1
+    specifier: ^18.2.0
     version: 18.3.1(react@18.3.1)
   sonner:
     specifier: ^2.0.1
@@ -107,11 +107,14 @@ devDependencies:
     specifier: ^20.17.19
     version: 20.17.32
   '@types/react':
-    specifier: ^18.3.20
+    specifier: ^18.2.55
     version: 18.3.20
   '@types/react-dom':
-    specifier: ^18.3.7
+    specifier: ^18.2.19
     version: 18.3.7(@types/react@18.3.20)
+  autoprefixer:
+    specifier: ^10.4.21
+    version: 10.4.21(postcss@8.5.3)
   clsx:
     specifier: ^2.1.1
     version: 2.1.1
@@ -7973,6 +7976,22 @@ packages:
     engines: {node: '>=8.0.0'}
     dev: false
 
+  /autoprefixer@10.4.21(postcss@8.5.3):
+    resolution: {integrity: sha512-O+A6LWV5LDHSJD3LjHYoNi4VLsj/Whi7k6zG12xTYaU4cQ8oxQGckXNX8cRHK5yOZ/ppVHe0ZBXGzSV9jXdVbQ==}
+    engines: {node: ^10 || ^12 || >=14}
+    hasBin: true
+    peerDependencies:
+      postcss: ^8.1.0
+    dependencies:
+      browserslist: 4.24.4
+      caniuse-lite: 1.0.30001716
+      fraction.js: 4.3.7
+      normalize-range: 0.1.2
+      picocolors: 1.1.1
+      postcss: 8.5.3
+      postcss-value-parser: 4.2.0
+    dev: true
+
   /available-typed-arrays@1.0.7:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
@@ -9950,6 +9969,10 @@ packages:
       mime-types: 2.1.35
     dev: false
 
+  /fraction.js@4.3.7:
+    resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
+    dev: true
+
   /fs-extra@9.1.0:
     resolution: {integrity: sha512-hcg3ZmepS30/7BSFqRvoo3DOMQu7IjqxO5nCDt+zM9XWjb33Wg7ziNT+Qvqbuc3+gWpzO02JubVyk2G4Zvo1OQ==}
     engines: {node: '>=10'}
@@ -11648,6 +11671,11 @@ packages:
   /normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
+
+  /normalize-range@0.1.2:
+    resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
+    engines: {node: '>=0.10.0'}
+    dev: true
 
   /number-to-bn@1.7.0:
     resolution: {integrity: sha512-wsJ9gfSz1/s4ZsJN01lyonwuxA1tml6X1yBDnfpMglypcBRFZZkus26EdPSlqS5GJfYddVZa22p3VNb3z5m5Ig==}
