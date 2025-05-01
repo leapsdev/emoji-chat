@@ -1,5 +1,3 @@
-'use client';
-
 import { EMOJI_ITEMS } from '../contents';
 import { EmojiItem } from './emojiItem';
 
