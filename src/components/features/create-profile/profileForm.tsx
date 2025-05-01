@@ -41,7 +41,7 @@ export function ProfileForm() {
 
   const clientAction = async (formData: FormData) => {
     try {
-      await handleProfileFormAction(formData);
+      await handleProfileFormAction(null, formData);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'エラーが発生しました');
     }
