@@ -1,3 +1,5 @@
+'use client';
+
 import { EmojiList } from '@/components/features/explore/components/emojiList';
 
 export function ExplorePage() {

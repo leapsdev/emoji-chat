@@ -1,9 +1,15 @@
-import type { Metadata, Viewport } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
-import '@/styles/globals.css';
-import { PrivyProvider } from '@/components/providers/privy-provider';
+'use client';
 
+import '@/styles/globals.css';
+import { Geist, Geist_Mono } from 'next/font/google';
+import { PrivyProvider } from '@/components/providers/privy-provider';
 import { Toaster } from 'sonner';
+
+// メタデータは別ファイルに移動するため、一時的にここでは型のみ定義
+type LayoutProps = Readonly<{
+  children: React.ReactNode;
+}>;
+
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -14,21 +20,7 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-export const metadata: Metadata = {
-  title: 'Emoji-Chat',
-  description: 'Emoji-Chat',
-  manifest: '/manifest.json',
-};
-
-export const viewport: Viewport = {
-  themeColor: '#FFFFFF',
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="ja">
       <body

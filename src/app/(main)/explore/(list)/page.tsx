@@ -1,3 +1,5 @@
+'use client';
+
 import { ExplorePage } from '@/components/pages/explorePage';
 
 export default function Page() {
