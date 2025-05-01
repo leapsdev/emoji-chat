@@ -8,35 +8,50 @@ import { profileFormSchema } from '@/repository/user/schema';
 import { useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
 import { usePrivy } from '@privy-io/react-auth';
-import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
+import { useEffect, useState } from 'react';
 import { handleProfileFormAction } from './action';
-import type { ProfileFormState } from './action';
 
-const initialState: ProfileFormState = null;
+function SubmitButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button
+      type="submit"
+      className="w-full bg-black text-white rounded-full py-6 text-lg font-bold hover:bg-gray-900"
+      disabled={pending}
+    >
+      {pending ? '作成中...' : 'プロフィールを作成'}
+    </Button>
+  );
+}
 
 export function ProfileForm() {
   const { user } = usePrivy();
   const basename = useBasename(undefined, true);
-  const [state, formAction, isPending] = useActionState(
-    handleProfileFormAction,
-    initialState,
-  );
+  const [error, setError] = useState<string | null>(null);
 
   const [form, fields] = useForm({
     id: 'profile-form',
     shouldValidate: 'onInput',
-    lastResult: state,
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: profileFormSchema });
     },
   });
 
+  const clientAction = async (formData: FormData) => {
+    try {
+      await handleProfileFormAction(formData);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'エラーが発生しました');
+    }
+  };
+
   return (
     <form
       className="space-y-6"
       id={form.id}
-      onSubmit={form.onSubmit}
-      action={formAction}
+      action={clientAction}
     >
       <input
         type="hidden"
@@ -44,15 +59,9 @@ export function ProfileForm() {
         value={user?.email?.address || ''}
       />
 
-      {state?.message && (
-        <div
-          className={`p-4 rounded-lg ${
-            state.status === 'error'
-              ? 'bg-red-100 text-red-700'
-              : 'bg-green-100 text-green-700'
-          }`}
-        >
-          {state.message}
+      {error && (
+        <div className="p-4 rounded-lg bg-red-100 text-red-700">
+          {error}
         </div>
       )}
 
@@ -96,13 +105,7 @@ export function ProfileForm() {
       </div>
 
       <div className="p-4 mt-auto">
-        <Button
-          type="submit"
-          className="w-full bg-black text-white rounded-full py-6 text-lg font-bold hover:bg-gray-900"
-          disabled={isPending}
-        >
-          {isPending ? '作成中...' : 'プロフィールを作成'}
-        </Button>
+        <SubmitButton />
       </div>
     </form>
   );

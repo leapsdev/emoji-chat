@@ -6,36 +6,21 @@ import { type ProfileForm, profileFormSchema } from '@/repository/user/schema';
 import { parseWithZod } from '@conform-to/zod';
 import { redirect } from 'next/navigation';
 
-export type ProfileFormState = {
-  message: string;
-  status: 'error' | 'success';
-} | null;
-
-export async function handleProfileFormAction(
-  _state: ProfileFormState,
-  formData?: FormData,
-): Promise<ProfileFormState> {
-  if (!formData) return null;
+export async function handleProfileFormAction(formData: FormData) {
   const submission = parseWithZod(formData, {
     schema: profileFormSchema,
   });
 
   if (submission.status === 'error') {
     if (!submission.error) {
-      return {
-        message: 'A validation error occurred',
-        status: 'error' as const,
-      };
+      throw new Error('バリデーションエラーが発生しました');
     }
 
     const firstError = Object.entries(submission.error).find(
       ([, errors]) => errors && errors.length > 0,
     );
 
-    return {
-      message: firstError?.[1]?.[0] || 'A validation error occurred',
-      status: 'error' as const,
-    };
+    throw new Error(firstError?.[1]?.[0] || 'バリデーションエラーが発生しました');
   }
 
   const profileData: ProfileForm = {
@@ -50,18 +35,12 @@ export async function handleProfileFormAction(
   try {
     const privyId = await getPrivyId();
     if (!privyId) {
-      return {
-        message: 'Failed to get authentication information',
-        status: 'error' as const,
-      };
+      throw new Error('認証情報の取得に失敗しました');
     }
 
     await updateUser(privyId, profileData);
   } catch (error) {
-    return {
-      message: error instanceof Error ? error.message : 'An error occurred',
-      status: 'error' as const,
-    };
+    throw new Error(error instanceof Error ? error.message : 'エラーが発生しました');
   }
 
   redirect('/chat');
