@@ -1,5 +1,3 @@
-'use client';
-
 import { ProfileMenu } from '@/components/features/choose-friends/profileMenu';
 import { ProfileTabs } from '@/components/features/profile/profileTabs';
 import { UserProfile } from '@/components/features/profile/userProfile';
