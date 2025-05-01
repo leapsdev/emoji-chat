@@ -1,12 +1,12 @@
 'use client';
 
 import { http, createConfig } from 'wagmi';
-import { baseSepolia } from 'viem/chains';
+import { base } from 'wagmi/chains';
 
 export const config = createConfig({
-  chains: [baseSepolia],
+  chains: [base],
   transports: {
-    [baseSepolia.id]: http(),
+    [base.id]: http(),
   },
   ssr: true,
 });

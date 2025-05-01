@@ -11,21 +11,31 @@ export type ProfileFormState = {
   status: 'error' | 'success';
 } | null;
 
-export async function handleProfileFormAction(formData: FormData) {
+export async function handleProfileFormAction(
+  _state: ProfileFormState,
+  formData?: FormData,
+): Promise<ProfileFormState> {
+  if (!formData) return null;
   const submission = parseWithZod(formData, {
     schema: profileFormSchema,
   });
 
   if (submission.status === 'error') {
     if (!submission.error) {
-      throw new Error('バリデーションエラーが発生しました');
+      return {
+        message: 'バリデーションエラーが発生しました',
+        status: 'error' as const,
+      };
     }
 
     const firstError = Object.entries(submission.error).find(
       ([, errors]) => errors && errors.length > 0,
     );
 
-    throw new Error(firstError?.[1]?.[0] || 'バリデーションエラーが発生しました');
+    return {
+      message: firstError?.[1]?.[0] || 'バリデーションエラーが発生しました',
+      status: 'error' as const,
+    };
   }
 
   const profileData: ProfileForm = {
@@ -37,12 +47,18 @@ export async function handleProfileFormAction(formData: FormData) {
   try {
     const privyId = await getPrivyId();
     if (!privyId) {
-      throw new Error('認証情報の取得に失敗しました');
+      return {
+        message: '認証情報の取得に失敗しました',
+        status: 'error' as const,
+      };
     }
 
     await createUser(profileData, privyId);
   } catch (error) {
-    throw new Error(error instanceof Error ? error.message : 'エラーが発生しました');
+    return {
+      message: error instanceof Error ? error.message : 'エラーが発生しました',
+      status: 'error' as const,
+    };
   }
 
   redirect('/choose-friends');
